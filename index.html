@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0e0e12" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="KRTN Chat" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <title>KRTN Chat</title>
+    <script type="module" crossorigin src="./assets/index-BQ-zb7QR.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C_5_4f5o.css">
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <button id="channel-button" class="channel-button" type="button">
+          <span id="status-dot" class="status-dot" data-state="closed"></span>
+          <span id="channel-label" class="channel-label">Kanal wählen</span>
+          <svg class="chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 7.5l5 5 5-5" /></svg>
+        </button>
+        <button id="settings-button" class="icon-button" type="button" aria-label="Einstellungen">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="5" cy="12" r="1.8" /><circle cx="12" cy="12" r="1.8" /><circle cx="19" cy="12" r="1.8" />
+          </svg>
+        </button>
+      </header>
+
+      <button id="banner" class="banner" type="button" hidden></button>
+
+      <div class="chat-wrap">
+        <main id="chat" class="chat">
+          <div id="empty" class="empty">
+            <p>Noch kein Kanal offen.</p>
+            <button id="empty-pick" class="primary" type="button">Kanal wählen</button>
+          </div>
+          <div id="messages" class="messages" aria-live="off"></div>
+        </main>
+        <button id="resume" class="resume" type="button" hidden>Neue Nachrichten ↓</button>
+      </div>
+
+      <footer class="composer">
+        <div id="actions" class="actions" hidden>
+          <button type="button" data-action="reply">Antworten</button>
+          <button type="button" data-action="mention">@ Erwähnen</button>
+          <button type="button" data-action="copy">Kopieren</button>
+        </div>
+        <div id="reply-chip" class="reply-chip" hidden>
+          <span id="reply-text"></span>
+          <button id="reply-cancel" type="button" aria-label="Antwort abbrechen">✕</button>
+        </div>
+        <div id="room-state" class="room-state" hidden></div>
+        <form id="composer-form" class="composer-row" autocomplete="off" hidden>
+          <input
+            id="input"
+            type="text"
+            maxlength="500"
+            enterkeyhint="send"
+            autocapitalize="sentences"
+            autocomplete="off"
+            placeholder="Nachricht senden"
+          />
+          <button id="send" class="send" type="submit" aria-label="Senden">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg>
+          </button>
+        </form>
+        <button id="login-cta" class="login-cta" type="button">Zum Schreiben bei Twitch anmelden</button>
+      </footer>
+    </div>
+
+    <dialog id="channel-sheet" class="sheet">
+      <div class="sheet-body">
+        <form id="channel-form" class="field-row">
+          <input
+            id="channel-input"
+            type="text"
+            placeholder="Kanalname oder twitch.tv/…"
+            autocapitalize="off"
+            autocorrect="off"
+            spellcheck="false"
+            enterkeyhint="go"
+          />
+          <button type="submit" class="primary">Öffnen</button>
+        </form>
+        <h3 id="recent-heading">Zuletzt</h3>
+        <ul id="recent-list" class="recent-list"></ul>
+      </div>
+    </dialog>
+
+    <dialog id="settings-sheet" class="sheet">
+      <div class="sheet-body">
+        <div class="sheet-header">
+          <h2>Einstellungen</h2>
+          <button type="button" class="text-button" data-close>Fertig</button>
+        </div>
+
+        <section class="card" id="account"></section>
+
+        <section class="card">
+          <label class="row">
+            <span>Uhrzeit anzeigen</span>
+            <input id="opt-timestamps" type="checkbox" class="switch" />
+          </label>
+          <div class="row">
+            <span>Schriftgröße</span>
+            <div id="opt-font" class="segmented">
+              <button type="button" data-value="small">A</button>
+              <button type="button" data-value="medium">A</button>
+              <button type="button" data-value="large">A</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <label class="stack">
+            <span>Twitch Client ID</span>
+            <input
+              id="client-id-input"
+              type="text"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"
+              placeholder="von dev.twitch.tv/console"
+            />
+          </label>
+          <p class="hint">Redirect-URL in der Twitch-App: <code id="redirect-uri"></code></p>
+        </section>
+
+        <section class="card">
+          <button id="reload-button" type="button" class="secondary">App neu laden</button>
+          <p class="hint" id="version"></p>
+        </section>
+      </div>
+    </dialog>
+
+  </body>
+</html>
